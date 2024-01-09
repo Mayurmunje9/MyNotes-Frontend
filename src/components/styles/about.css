@@ -1,0 +1,41 @@
+.about-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #343a40;
+    line-height: 1.6;
+  }
+  
+  h1, h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  ul, ol {
+    padding-left: 20px;
+  }
+  
+  li {
+    margin-bottom: 8px;
+  }
+  
+  p {
+    margin-bottom: 15px;
+  }
+  
+  /* Add a subtle hover effect on links */
+  a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #0056b3;
+  }
+  
+  
