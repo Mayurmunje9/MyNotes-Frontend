@@ -1,16 +1,19 @@
 //newsignup 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../components/styles/SignUp.css";
 import Alert from "./Alert";
 import NotesContext from "./context/notes/notesContext";
 
-const SignUp = () => {
-  const host = "http://localhost:4000";
+const SignUp = (props) => {
+  // const host = "https://mynotes-3tlm.onrender.com";
+    const host = "https://mynotes-3tlm.onrender.com";
+
   const history = useNavigate();
   
   // Use useContext to access the NotesContext
-  const { showAlert } = useContext(NotesContext);
+  const context = useContext(NotesContext);
+  const { alert,showAlert} = context;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -40,15 +43,15 @@ const SignUp = () => {
           body: JSON.stringify({ name, email, password }),
         });
         const json = await response.json();
-        console.log(json);
 
         if (json.success) {
           // Save authtoken and redirect to home page
-          history("/"); // Call history function to navigate
+          history("/");
           console.log(localStorage.setItem("token", json.authToken));
-          return;
+          showAlert("Logged In Successfully ","success")
         } else {
-          showAlert("User creation failed: " + json.message, "danger");
+          console.log("Cant create")
+          showAlert("User already exist ", "danger");
         }
       } catch (error) {
         console.error("Error during user creation:", error);
@@ -59,8 +62,16 @@ const SignUp = () => {
     }
   };
 
+  // useEffect(() => {
+  //   if (alert && alert.msg) {
+  //     // Display the alert if there is a message
+  //     showAlert(alert.msg, alert.type);
+  //   }
+  // }, [alert]);
+
   return (
     <div className="SignUpContainer">
+      <Alert  alert={alert}  />
       <h2 className="Title">Sign Up to start using MyNotes</h2>
       <form className="Form" onSubmit={handleSubmit}>
         <div className="FormGroup">
