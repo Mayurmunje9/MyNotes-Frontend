@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
+import NotesContext from "./context/notes/notesContext";
 import logo from "../components/logo.png"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 export default function Navbar() {
   let location = useLocation();
   let history = useNavigate();
+  const context = useContext(NotesContext);
+  const { alert,showAlert} = context;
   React.useEffect(() => {
-    // Google Analytics
     console.log(location.pathname);
     // if(signout){
     //   localStorage.removeItem('token');
@@ -16,6 +18,7 @@ export default function Navbar() {
     try {
       localStorage.removeItem("token");
       console.log("Token removed successfully");
+      showAlert("Signed out successfully", "danger");
     } catch (error) {
       console.error("Error removing token from localStorage:", error);
     }
@@ -102,3 +105,4 @@ export default function Navbar() {
     </div>
   );
 }
+
